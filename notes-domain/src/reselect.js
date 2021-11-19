@@ -1,0 +1,1 @@
+// export baseNotesState = (state, Nstate): 
