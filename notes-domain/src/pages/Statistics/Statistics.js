@@ -6,8 +6,6 @@ import { loadingSelector, notesSelector } from "../Notes/selectors/notesSelector
 import { getNoteList } from "../Notes/thunks/notesThunk";
 import PropTypes from "prop-types";
 import moment from "moment";
-// import moment from "moment";
-
 class Statistics extends React.Component {
   state = {
     filteredInfo: null,
