@@ -1,7 +1,6 @@
-import React from "react";
-import { Input } from "antd";
+import React from 'react';
+import { Input } from 'antd';
 
-export const InputField = (props) => {
-    // console.log(props.values);
-    return <Input {...props.input}  placeholder={props.placeholder} addonBefore={props.addonBefore}/>  
-}
+export const InputField = (props) =>
+  // eslint-disable-next-line react/destructuring-assignment,react/prop-types
+  <Input {...props.input} placeholder={props.placeholder} />;
