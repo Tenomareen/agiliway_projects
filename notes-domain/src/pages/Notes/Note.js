@@ -1,16 +1,19 @@
-import { Col, Card, Menu, Dropdown } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
-import Proptypes from "prop-types";
-import moment from "moment";
+import {
+  Col, Card, Menu, Dropdown,
+} from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import moment from 'moment';
 
-const Note = ({ note, showModalDelete, getNote}) => {
+const Note = ({ note, showModal, getNoteForEdit }) => {
   const menu = (
     <Menu destroyPopupOnHide>
       <Menu.Item
         key="0"
         onClick={() => {
-          getNote(note.uuid);
+          showModal('edit')
+          getNoteForEdit(note.uuid);
         }}
       >
         Edit
@@ -21,7 +24,7 @@ const Note = ({ note, showModalDelete, getNote}) => {
       <Menu.Divider />
       <Menu.Item
         key="3"
-        onClick={() => showModalDelete("delete", note.uuid)}
+        onClick={() => showModal('delete', note.uuid)}
       >
         Delete
       </Menu.Item>
@@ -32,13 +35,13 @@ const Note = ({ note, showModalDelete, getNote}) => {
     <Col span={8}>
       <Card
         title={note.name}
-        bordered={true}
-        style={{ marginBottom: "5px" }}
+        bordered
+        style={{ marginBottom: '5px' }}
       >
-        <div>{note.description}</div>
-        <div>{moment(note.createDate).format("MMMM Do YYYY")}</div>
+        <div className="description">{note.description}</div>
+        <div className="date">{moment(note.createDate).format('MMMM Do YYYY')}</div>
         {/* <div> */}
-        <Dropdown overlay={menu} trigger={["click"]} destroyPopupOnHide>
+        <Dropdown overlay={menu} trigger={['click']} destroyPopupOnHide>
           <a
             href="#/"
             className="ant-dropdown-link"
@@ -46,7 +49,9 @@ const Note = ({ note, showModalDelete, getNote}) => {
               e.preventDefault();
             }}
           >
-            Click me <DownOutlined />
+            Click me
+            {' '}
+            <DownOutlined />
           </a>
         </Dropdown>
         {/* </div> */}
@@ -55,10 +60,22 @@ const Note = ({ note, showModalDelete, getNote}) => {
   );
 };
 
-Note.propTypes ={
-  note: Proptypes.object,
-  showModalDelete: Proptypes.func,
-  getNote: Proptypes.func,
-}
+Note.propTypes = {
+  note: PropTypes.shape({
+    uuid: PropTypes.string,
+    name: PropTypes.string,
+    author: PropTypes.string,
+    description: PropTypes.string,
+    createDate: PropTypes.string,
+  }),
+  showModal: PropTypes.func,
+  getNoteForEdit: PropTypes.func,
+};
+
+Note.defaultProps = {
+  note: {},
+  showModal: () => {},
+  getNoteForEdit: () => {},
+};
 
 export default Note;

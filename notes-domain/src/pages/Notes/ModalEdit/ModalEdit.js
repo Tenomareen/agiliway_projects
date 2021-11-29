@@ -1,7 +1,7 @@
-import { Modal, Button } from "antd";
-import React from "react";
-import NoteForm from "../Form/NoteForm";
-import PropTypes from "prop-types";
+import { Modal, Button } from 'antd';
+import React from 'react';
+import PropTypes from 'prop-types';
+import NoteForm from '../Form/NoteForm';
 
 const ModalEdit = ({
   visible,
@@ -9,43 +9,51 @@ const ModalEdit = ({
   closeModal,
   noteEdit,
   handleSubmitEdit,
-}) => {
-  
-  return (
-    <>
-      <Modal
-        visible={visible}
-        title="Edit"
+}) => (
+  <Modal
+    visible={visible}
+    title="Edit"
         // onOk={handleOk}
-        onCancel={closeModal}
-        footer={[
-          <Button key="back" onClick={closeModal}>
-            Return
-          </Button>,
-          <Button
-            key="submit"
-            type="primary"
-            htmlType="submit"
-            form="form"
-            loading={loading}
-            // onClick={handleOk}
-          >
-            Submit
-          </Button>,
-        ]}
+    onCancel={closeModal}
+    footer={[
+      <Button key="back" onClick={closeModal}>
+        Return
+      </Button>,
+      <Button
+        key="submit"
+        type="primary"
+        htmlType="submit"
+        form="form"
+        loading={loading}
       >
-        <NoteForm handleSubmit={handleSubmitEdit} note={noteEdit} loading={loading} />
-      </Modal>
-    </>
-  );
-};
+        Submit
+      </Button>,
+    ]}
+  >
+    <NoteForm handleSubmit={handleSubmitEdit} note={noteEdit} loading={loading} />
+  </Modal>
+);
 
-ModalEdit.propTypes ={
+ModalEdit.propTypes = {
   visible: PropTypes.bool,
   closeModal: PropTypes.func,
   loading: PropTypes.bool,
-  noteEdit: PropTypes.object,
+  noteEdit: PropTypes.shape({
+    uuid: PropTypes.string,
+    name: PropTypes.string,
+    author: PropTypes.string,
+    description: PropTypes.string,
+    createDate: PropTypes.string,
+  }),
   handleSubmitEdit: PropTypes.func,
-}
+};
+
+ModalEdit.defaultProps = {
+  visible: false,
+  closeModal: () => {},
+  loading: true,
+  noteEdit: {},
+  handleSubmitEdit: () => {},
+};
 
 export default ModalEdit;
