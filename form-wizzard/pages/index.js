@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -12,7 +13,17 @@ export default function Home() {
       </Head>
 
       <main className={styles.main} style={{display: 'flex', justifyContent:'center', minHeight: 'calc( 100vh - 90px '}}>
-      <div> Body </div>
+      <Link href="/loginForm/">
+          <button className={styles.button}>
+       
+              <span className={styles.secondSpan}>
+                <span className={styles.firstSpan}>
+                  <a>Start</a>
+                </span>
+              </span>
+
+            </button>
+          </Link>
       </main>
 
       <footer className={styles.footer}>
